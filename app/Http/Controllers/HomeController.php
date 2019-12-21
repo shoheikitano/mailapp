@@ -10,7 +10,7 @@ class HomeController extends Controller
     //
     public function index() {
 
-      $user = Auth::uesr();
+      $user = Auth::user();
 
       $folder = $user->folders()->first();
 
