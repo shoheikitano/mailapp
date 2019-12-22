@@ -12,14 +12,29 @@
             </a>
           </div>
           <div class="list-group">
+            <table class="table">
+            <thead>
+              <tr>
+                <th>タイトル</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
             @foreach($folders as $folder)
-              <a
-                  href="{{ route('tasks.index', ['id' => $folder->id]) }}"
-                  class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
-              >
-                {{ $folder->title }}
-              </a>
+              <tr>
+                <td><a
+                    href="{{ route('tasks.index', ['id' => $folder->id]) }}"
+                    class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
+                >
+                  {{ $folder->title }}
+                </a></td>
+                <td><a href="{{ route('folders.edit', ['id' => $folder->id]) }}" class="btn btn-info " >編集</a></td>
+                <td><a href="{{ route('folders.delete', ['id' => $folder->id]) }}" class="btn btn-danger " >削除</a></td>
+              </tr>
             @endforeach
+            </tbody>
+            </table>
           </div>
         </nav>
       </div>
@@ -40,6 +55,7 @@
               <th>状態</th>
               <th>期限</th>
               <th></th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -51,6 +67,7 @@
                 </td>
                 <td>{{ $task->formatted_due_date }}</td>
                 <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">編集</a></td>
+                <td><a href="{{ route('tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">削除</a></td>
               </tr>
             @endforeach
             </tbody>

@@ -15,6 +15,10 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
     Route::post('/folders/create', 'FolderController@create');
+    Route::get('/folders/{folder}/delete','FolderController@showDelete')->name('folders.delete');
+    Route::post('/folders/{folder}/delete','FolderController@delete');
+    Route::get('/folders/{folder}/edit','FolderController@showEditForm')->name('folders.edit');
+    Route::post('/folders/{folder}/edit','FolderController@edit');
 
     Route::group(['middleware' => 'can:view,folder'], function() {
         Route::get('/folders/{folder}/tasks', 'TaskController@index')->name('tasks.index');
@@ -24,6 +28,9 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::get('/folders/{folder}/tasks/{task}/edit', 'TaskController@showEditForm')->name('tasks.edit');
         Route::post('/folders/{folder}/tasks/{task}/edit', 'TaskController@edit');
+
+        Route::get('/folders/{folder}/tasks/{task}/delete', 'TaskController@showDelete')->name('tasks.delete');
+        Route::post('/folders/{folder}/tasks/{task}/delete', 'TaskController@delete');
     });
 });
 
